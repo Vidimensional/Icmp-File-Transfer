@@ -16,25 +16,20 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import socket
+#import socket
 import sys
  
 
 from IcmpPacket import *
+from IcmpSocket import *
 
 action = sys.argv[1]
 filename = sys.argv[2]
 if action == 'send':
     dst_addr = sys.argv[3]
 
-s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
-
-def send_icmp (s, packet):
-    s.sendto(packet.packet, (dst_addr,1))
-
-def recv_icmp (s):
-    packet = IcmpPacket(raw_p=s.recv(1024)[20:])
-    return packet
+#s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+icmp_socket = IcmpSocket()
 
 if action == 'send': 
     mode = 'r'
@@ -46,10 +41,10 @@ if action == 'send':
         if not data:
             packet = IcmpPacket(ECHO_REQUEST, seq_n=seq_n, payload=data, 
                                 code=2)
-            send_icmp(s, packet)
+            icmp_socket.sendto(packet, dst_addr)
             break
         packet = IcmpPacket(ECHO_REQUEST, seq_n=seq_n, payload=data)
-        send_icmp(s, packet)
+        icmp_socket.sendto(packet, dst_addr)
         seq_n += 1
 
 elif action == 'recv': 
@@ -57,15 +52,14 @@ elif action == 'recv':
     f = open(filename, mode)
     buff = []
     while True:
-        icmp = recv_icmp(s)
+        icmp = icmp_socket.recv()
         if icmp.code is 2: break
         buff.append((icmp.seq_n, icmp.payload))
     buff.sort()
     str_buff = ''
     for elem in buff:
-        str_buff += buff
-    print str_buff
-        
+        str_buff += elem[1]
+    f.write(str_buff) 
 
     
 
