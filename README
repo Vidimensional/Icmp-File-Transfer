@@ -3,3 +3,6 @@ ICMP FILE TRANSFER
 Usage: 
   Server: # python icmp.py recv <destination file>
   Client: # python icmp.py send <file to transfer> <server's address>
+
+SEE ALSO:
+http://vidimensional.wordpress.com/2013/06/21/sending-files-through-icmp/
