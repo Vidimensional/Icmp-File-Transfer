@@ -1,5 +1,5 @@
 ICMP FILE TRANSFER
 
 Usage: 
-  Server: # python icmp.py recv
+  Server: # python icmp.py recv <destination file>
   Client: # python icmp.py send <file to transfer> <server's address>
