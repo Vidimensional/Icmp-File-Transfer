@@ -17,20 +17,17 @@
 
 import sys
 
-#from IcmpPacket import *
-#from IcmpSocket import *
-from IcmpApp import IcmpSender, IcmpReceiver
+from ICMP.IcmpApp import IcmpSender, IcmpReceiver
 
 action = sys.argv[1]
 filename = sys.argv[2]
-if action == 'send':
-    dst_addr = sys.argv[3]
 
-#icmp_socket = IcmpSocket()
 
 if action == 'send': 
+    dst_addr = sys.argv[3]
     with IcmpSender(filename) as sender:
         sender.send(dst_addr)
+
 elif action == 'recv': 
     with IcmpReceiver(filename) as receiver:
         receiver.receive()
