@@ -1,8 +1,38 @@
-ICMP FILE TRANSFER
+Icmp File Transfer -- Send files using ICMP as the transport protocol. (ICMP/IP)
 
-Usage: 
-  Server: # python icmp.py recv <destination file>
-  Client: # python icmp.py send <file to transfer> <server's address>
 
-SEE ALSO:
-http://vidimensional.wordpress.com/2013/06/21/sending-files-through-icmp/
+USAGE:
+  icmp.py recv <destination file>
+  icmp.py send <file to transfer> <remote address>
+
+
+DESCRIPTION:
+  Icmp File Transfer is a simple tool to test if a network user can exfiltrate
+  information without being noticed using ICMP. It uses the data field of the
+  ICMP ECHO REQUEST packets in order to hide this information.   
+
+
+COMMANDS
+  recv: 
+    Listens for ICMP packets and tries to assemble them into a file and store it
+    on <destination file> path. At this point it cannot discern if a received 
+    packet is from a file transmission or not, so if it receives normal ICMP 
+    packets it can fail to assemble the file, this should be fixed on a future
+    release.
+ 
+  send:
+    Reads <file to transfer> and sends it to <remote address> using the ICMP/IP
+    stack.
+
+
+AUTHOR
+  Daniel Vidal de la Rubia.
+
+
+BUGS
+  https://github.com/Vidimensional/Icmp-File-Transfer/issues
+
+
+SEE ALSO
+  http://vidimensional.wordpress.com/2013/06/21/sending-files-through-icmp/
+
