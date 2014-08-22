@@ -2,7 +2,7 @@
 
 
 #    IcmpPacket: Little library to manage icmp protocol
-#    Copyright (C) 2012 Daniel Vidal de la Rubia
+#    Copyright (C) 2012-2014 Daniel Vidal de la Rubia
 #    
 #    Based on ping.py package by George Notaras 
 #    http://www.g-loaded.eu/2009/10/30/python-ping/
